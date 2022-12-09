@@ -6,6 +6,7 @@ def logger(path):
         def new_function(*args, **kwargs):
             date = datetime.now()
             name = old_function.__name__
+            result = old_function(*args, **kwargs)
             with open(path, 'a', encoding='utf-8') as f:
                 f.write(
                     f'Дата и время обращения {date}\n'
@@ -13,9 +14,11 @@ def logger(path):
                     f'Аргументы функции {args} {kwargs}\n'
                     f'\n'
                 )
+            return result
+
         return new_function
 
-    return __logger
+    return logger
 
 
 def test_2():
